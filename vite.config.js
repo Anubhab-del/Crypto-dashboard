@@ -4,10 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/',
-  resolve: {
-    alias: {
-      '@': '/src'  // For easy imports like import from '@/components'
+  base: '/',  
+  build: {
+    outDir: 'dist',  
+    rollupOptions: {
+      input: '/index.html'  
     }
   }
 })
