@@ -4,11 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/',  
+  base: '/',  // Ensures paths are absolute for production
   build: {
-    outDir: 'dist',  
-    rollupOptions: {
-      input: '/index.html'  
-    }
+    outDir: 'dist', 
   }
 })
