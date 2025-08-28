@@ -1,11 +1,49 @@
 import { format } from 'date-fns'
-import { fetchMarkets, fetchApiChart } from '../../services/coingeckoapi'
-import { setCryptos, setPrices, setChartData, setError } from '../actions'  // Assume you have these actions; adjust if needed
+import { fetchMarkets, fetchApiChart } from '../../services/coingeckoapi';
+
+export const setBaseCurrency = (currency) => ({
+  type: 'SET_BASE_CURRENCY',
+  payload: currency,
+})
+
+export const setChartType = (type) => ({
+  type: 'SET_CHART_TYPE',
+  payload: type,
+})
+
+export const setSelectedCryptos = (cryptos) => ({
+  type: 'SET_SELECTED_CRYPTOS',
+  payload: cryptos,
+})
+
+export const setCryptos = (cryptos) => ({
+  type: 'SET_CRYPTOS',
+  payload: cryptos,
+})
+
+export const setPrices = (prices) => ({
+  type: 'SET_PRICES',
+  payload: prices,
+})
+
+export const setChartData = (data) => ({
+  type: 'SET_CHART_DATA',
+  payload: data,
+})
+
+export const setError = (error) => ({
+  type: 'SET_ERROR',
+  payload: error,
+})
+
+export const updatePortfolio = (sellId, sellAmount, buyId, buyAmount) => ({
+  type: 'UPDATE_PORTFOLIO',
+  payload: { sellId, sellAmount, buyId, buyAmount },
+})
 
 export const fetchCryptos = (currency) => async (dispatch) => {
   try {
     const data = await fetchMarkets(currency)
-    if (!data) throw new Error('No data returned')
     dispatch(setCryptos(data))
     const prices = data.reduce((acc, c) => ({ ...acc, [c.id]: c.current_price }), {})
     dispatch(setPrices(prices))
@@ -26,10 +64,9 @@ export const fetchChartData = (cryptos, currency) => async (dispatch) => {
     const datasets = []
     for (const id of cryptos) {
       const prices = await fetchApiChart(id, currency)
-      if (!prices) throw new Error('No chart data returned')
       const monthlyData = new Array(labels.length).fill(0)
       const counts = new Array(labels.length).fill(0)
-      prices.forEach(([timestamp, price]) => {  // Fixed syntax: added ) after [timestamp, price]
+      prices.forEach(([timestamp, price]) => {
         const month = format(new Date(timestamp), 'MMM')
         const index = labels.indexOf(month)
         if (index !== -1) {
