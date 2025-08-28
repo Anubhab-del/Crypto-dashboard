@@ -1,12 +1,42 @@
-# React + Vite
+Cryptocurrency Dashboard
+A modern web application for tracking and managing cryptocurrencies, built with React and Vite. It fetches real-time data from the CoinGecko API, allows users to visualize market trends, manage a portfolio, and simulate coin exchanges. The app is responsive, error-resilient, and deployed on Vercel.
+Functionalities
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Base Currency Switch: Select from USD, INR, or EUR in the header dropdown. Switches update all prices, market caps, and charts in the chosen currency.
+Search Bar: Search for a specific cryptocurrency by name (e.g., "bitcoin"). Updates the chart to show data for the searched coin.
+Multi-Crypto Selection and Comparison: Use the dropdown to select multiple cryptos (searchable with react-select). Compares their price data in the main chart.
+Chart Visualization: Main chart shows monthly price data over 6 months. Switch between line, bar, or horizontal bar types. Legends, tooltips, and colors for each coin.
+Market Cap Sidebar: Lists top 10 cryptos by market cap, with name, value in base currency, and 24h change % (green up, red down). Scrollable with alternating rows for readability.
+Portfolio Pie Chart: Visualizes user portfolio holdings with colored slices. Updates dynamically on exchanges.
+Coin Exchange Form: Simulate buying/selling coins. Select sell/buy coin, enter amount—auto-calculates based on prices. Validates input, shows errors. On exchange, updates portfolio and pie chart (no page refresh).
+Error and Loading Handling: Shows loading spinner during fetches, error messages on network issues (with reload button). Retries on rate limits.
 
-Currently, two official plugins are available:
+Usage
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Switch currency in header.
+Search or select multiple coins for chart.
+View market cap list on right.
+In exchange: Select sell/buy, enter amount, click Exchange—see pie update
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Deployment
+Deployed on Vercel:
+
+Import GitHub repo in Vercel dashboard.
+Select Vite framework.
+Build command: vite build
+Output: dist
+
+Technologies
+
+Frontend: React, Vite (build tool)
+State Management: Redux, redux-thunk
+Styles: TailwindCSS
+Charts: Chart.js, react-chartjs-2
+API: CoinGecko (with proxy for CORS)
+Others: Axios (fetches), react-select (dropdowns), date-fns (dates), lodash (debounce)
+
+Known Issues & Fixes
+
+Network errors: Handled with retries/backoff in services.
+Rate limits: Caching added—refresh if persistent.
