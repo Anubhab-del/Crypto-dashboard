@@ -21,6 +21,7 @@ In exchange: Select sell/buy, enter amount, click Exchange—see pie update
 
 Deployment
 Deployed on Vercel:
+https://crypto-dashboard-yi1w-git-main-anubhab-dashs-projects.vercel.app?_vercel_share=kghqzRWUsmRWQxRk8byUqPER8TjVG4r3
 
 Import GitHub repo in Vercel dashboard.
 Select Vite framework.
@@ -40,3 +41,7 @@ Known Issues & Fixes
 
 Network errors: Handled with retries/backoff in services.
 Rate limits: Caching added—refresh if persistent.
+For smooth use: Try responding to it every 13 seconds
+It works smoothly. A new out of box idea i had applied very closely to the project.
+Hope you Like it
+Thank You.
